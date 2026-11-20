@@ -1,0 +1,60 @@
+{
+  "name": "nepalipi",
+  "version": "2.4.11",
+  "description": "Browser-side Roman-to-Nepali transliteration and input controller.",
+  "keywords": [
+    "nepali",
+    "transliteration",
+    "devanagari",
+    "ime",
+    "browser"
+  ],
+  "homepage": "https://github.com/razaanstha/nepalipi#readme",
+  "bugs": {
+    "url": "https://github.com/razaanstha/nepalipi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razaanstha/nepalipi.git"
+  },
+  "license": "SEE LICENSE IN LICENSES.md",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "browser": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "CHANGELOG.md",
+    "LICENSES.md",
+    "dist/",
+    "scripts/build-native-lexicon.py"
+  ],
+  "engines": {
+    "node": "^22.12.0 || >=23.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
