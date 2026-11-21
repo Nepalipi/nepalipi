@@ -148,9 +148,9 @@ summary { cursor: pointer; }
 .integration-start h3 + .engine-note { margin: 6px 0 12px; }
 .integration-start .code-card + .code-card { margin-top: 8px; }
 .integration .engine-note { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
-.integration-start .code-card { border-color: transparent; background: linear-gradient(var(--field), var(--field)) padding-box, var(--frame) border-box; }
+.integration-start .code-card { border: 3px solid transparent; background: linear-gradient(var(--field), var(--field)) padding-box, var(--frame) border-box; }
 .integration-reference {
-  border: 1px solid transparent;
+  border: 3px solid transparent;
   border-radius: 14px;
   background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--frame) border-box;
   padding: 0 16px;
