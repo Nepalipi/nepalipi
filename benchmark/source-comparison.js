@@ -117,6 +117,7 @@ function renderTable(){
 }
 function renderContext(s){
   const sentence=s.kind==='sentence',headers=document.querySelectorAll('.source-table thead th');
+  $('public-word-sources').hidden=s.id!=='public-full';
   const metric=$('comparison-metric').value;
   $('score-direction').textContent=['cer','wer'].includes(metric)?'Lower error rates are better':'Higher match rates are better';
   const keys=sentence?['exact','wer','cer']:['first','withinThree','withinFive','cer'];
