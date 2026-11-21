@@ -25,9 +25,8 @@
   --side: #f2f0f8;
   --code: #f5f2fb;
   --code-text: #35334a;
-  --editor-gradient: radial-gradient(ellipse at 16% 0%, #ded6f7, transparent 58%),
+  --frame: radial-gradient(ellipse at 16% 0%, #ded6f7, transparent 58%),
     linear-gradient(112deg, #ebebf7, #e3edf7 55%, #dcefe9);
-  --frame: linear-gradient(112deg, #a895f2, #dec6fd 32%, #f5b1a0 76%, #ffd4ac);
   --hero-accent: #6547b8;
   --popup-shadow: 0 12px 30px #2d265a22, 0 2px 6px #2d265a12;
 }
@@ -45,9 +44,8 @@
   --side: #352b48;
   --code: #201a2f;
   --code-text: #e1d7f4;
-  --editor-gradient: radial-gradient(ellipse at 16% 0%, #45395a, transparent 58%),
+  --frame: radial-gradient(ellipse at 16% 0%, #45395a, transparent 58%),
     linear-gradient(112deg, #322c45, #30394d 55%, #2d4645);
-  --frame: linear-gradient(112deg, #534090, #7751a0 35%, #9e5c79 75%, #a36a55);
   --hero-accent: #c5b0ff;
   --popup-shadow: 0 12px 30px #0008, 0 2px 6px #0004;
 }
@@ -83,7 +81,7 @@ h1 [lang=ne] { color: inherit; font-family: Nepali, sans-serif; letter-spacing: 
 .install-command button:hover { background: var(--accent); color: var(--accent-ink); }
 .intro .install-status { margin-top: 8px; font-size: 12px; }
 .intro .install-status:empty { margin-top: 0; }
-.editor-frame { min-width: 0; padding: 8px; border-radius: 22px; background: var(--editor-gradient); box-shadow: var(--popup-shadow); }
+.editor-frame { min-width: 0; padding: 8px; border-radius: 22px; background: var(--frame); box-shadow: var(--popup-shadow); }
 .lab-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 6px 12px; }
 .renderer-switch, .appearance { display: flex; gap: 2px; padding: 3px; border-radius: 10px; background: var(--surface); }
 .renderer-switch button, .appearance button { border: 0; border-radius: 7px; padding: 7px 13px; background: transparent; color: var(--muted); font-size: 13px; }
@@ -121,7 +119,7 @@ kbd { font-family: DM, sans-serif; }
   padding: clamp(16px, 3vw, 30px);
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: linear-gradient(115deg, var(--soft), var(--surface) 75%);
+  background: var(--frame);
 }
 .hint-intro h2 { font-size: 21px; font-weight: 600; }
 .hint-intro p, .integration-intro p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
@@ -151,7 +149,12 @@ summary { cursor: pointer; }
 .integration-start .code-card + .code-card { margin-top: 8px; }
 .integration .engine-note { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
 .integration-start .code-card { border-color: transparent; background: linear-gradient(var(--field), var(--field)) padding-box, var(--frame) border-box; }
-.integration-reference { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 0 16px; }
+.integration-reference {
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--frame) border-box;
+  padding: 0 16px;
+}
 .integration-topic, .markup-preview { border-bottom: 1px solid var(--line); }
 .integration-reference > :last-child { border-bottom: 0; }
 .integration-reference summary { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 0; font-size: 14px; font-weight: 600; list-style: none; }
