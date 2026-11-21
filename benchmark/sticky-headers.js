@@ -1,44 +1,66 @@
-// Keep the original semantic headers visible while the document scrolls.
-// A horizontal overflow region traps CSS sticky positioning on the vertical axis,
-// so translate each header inside its own full-height table instead.
-const tables=[...document.querySelectorAll('.source-table,.word-grid')].map(table=>({
-  table,head:table.tHead,offset:0,height:0
-}));
-let frame=0;
-function update(){
-  frame=0;
-  const positions=tables.map(item=>{
-    const bounds=item.head.getBoundingClientRect();
-    const originalTop=bounds.top-item.offset;
-    const maximum=Math.max(0,item.table.getBoundingClientRect().bottom-originalTop-bounds.height);
-    return {item,height:bounds.height,offset:Math.max(0,Math.min(-originalTop,maximum))};
-  });
-  for(const {item,height,offset} of positions){
-    if(offset!==item.offset){
-      item.offset=offset;
-      item.head.style.transform='translate3d(0,'+offset+'px,0)';
-    }
-    if(height!==item.height){
-      item.height=height;
-      item.table.style.setProperty('--header-height',height+'px');
-    }
+// Keep vertical stickiness outside the horizontal scroller so the browser can
+// pin the visible header during compositor scrolling. The original table owns
+// the accessible headers and determines the column widths.
+for (const table of document.querySelectorAll('.source-table, .word-grid')) {
+  const scroller = table.parentElement;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'sticky-table';
+
+  const viewport = document.createElement('div');
+  viewport.className = 'sticky-table-header';
+  viewport.setAttribute('aria-hidden', 'true');
+  viewport.inert = true;
+
+  const mirror = document.createElement('table');
+  mirror.className = 'sticky-' + table.className;
+  const columns = mirror.createTHead();
+  const widths = document.createElement('colgroup');
+  mirror.prepend(widths);
+  viewport.append(mirror);
+
+  scroller.before(wrapper);
+  wrapper.append(scroller, viewport);
+
+  function syncHorizontal() {
+    viewport.scrollLeft = scroller.scrollLeft;
   }
+
+  function syncHeader() {
+    const head = table.tHead;
+    const bounds = head.getBoundingClientRect();
+    const scrollBounds = scroller.getBoundingClientRect();
+    const cells = Array.from(head.rows[0]?.cells ?? []);
+    const columnWidths = cells.map(cell => cell.getBoundingClientRect().width);
+    viewport.style.marginTop = (bounds.top - scrollBounds.top) + 'px';
+    viewport.style.marginInline = scroller.clientLeft + 'px';
+    viewport.style.height = bounds.height + 'px';
+    viewport.style.setProperty('--word-input', getComputedStyle(table).getPropertyValue('--word-input'));
+    table.style.setProperty('--header-height', bounds.height + 'px');
+    mirror.style.width = table.getBoundingClientRect().width + 'px';
+    widths.replaceChildren(...columnWidths.filter(Boolean).map(width => {
+      const col = document.createElement('col');
+      col.style.width = width + 'px';
+      return col;
+    }));
+    const row = head.rows[0]?.cloneNode(true);
+    row?.querySelector('[aria-sort]')?.removeAttribute('aria-sort');
+    columns.replaceChildren(...(row ? [row] : []));
+    wrapper.dataset.ready = '';
+    syncHorizontal();
+  }
+
+  const sizes = new ResizeObserver(syncHeader);
+  sizes.observe(table);
+  sizes.observe(table.tHead);
+  sizes.observe(scroller);
+  const content = new MutationObserver(syncHeader);
+  content.observe(table.tHead, { subtree: true, childList: true, attributes: true });
+  scroller.addEventListener('scroll', syncHorizontal, { passive: true });
+
+  table.tBodies[0].addEventListener('focusin', event => {
+    const header = viewport.getBoundingClientRect();
+    if (header.top > 0 || header.bottom <= 0) return;
+    const overlap = header.bottom + 8 - event.target.getBoundingClientRect().top;
+    if (overlap > 0) window.scrollBy(0, -overlap);
+  });
 }
-function schedule(){if(!frame)frame=requestAnimationFrame(update);}
-const sizes=new ResizeObserver(schedule);
-const content=new MutationObserver(schedule);
-for(const {table,head} of tables){
-  sizes.observe(table);sizes.observe(head);
-  content.observe(table,{childList:true,subtree:true});
-}
-window.addEventListener('scroll',schedule,{passive:true});
-window.addEventListener('resize',schedule);
-// Keyboard focus must remain below the header, including expanded alternatives.
-document.addEventListener('focusin',event=>{
-  const item=tables.find(({table})=>table.tBodies[0]?.contains(event.target));
-  if(!item||!item.offset)return;
-  const top=event.target.getBoundingClientRect().top;
-  const edge=item.head.getBoundingClientRect().bottom+8;
-  if(top<edge)window.scrollBy(0,top-edge);
-});
-schedule();
