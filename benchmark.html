@@ -26,7 +26,6 @@
     <div class="comparison-toolbar">
       <label class="set-control"><span>Test set</span><select id="comparison-set"><button type="button"><selectedcontent></selectedcontent></button></select></label>
       <div class="comparison-filters">
-        <label>Category<select id="comparison-category"><button type="button"><selectedcontent></selectedcontent></button></select></label>
         <label id="ranking-filter">Score ranking<select id="comparison-metric"><button type="button"><selectedcontent></selectedcontent></button><option value="first">First match</option><option value="withinThree">Within three</option><option value="withinFive">Within five</option><option value="cer">Character error</option></select></label>
         <label class="checkbox-label"><input id="comparison-history" type="checkbox"> Include older versions</label>
       </div>
@@ -58,6 +57,11 @@
       <p id="comparison-independence"></p>
       <p>Renamed from Nepali Writer. Saved results and downloads retain their original engine names; the current engine is displayed as Nepalipi.</p>
       <p id="population-note">Every word set has at least 2,000 unique inputs. The four views overlap; their scores must not be pooled. Smaller authored checks remain in the detailed diagnostics.</p>
+      <div class="category-breakdown">
+        <label>Break down the test set<select id="comparison-category" aria-describedby="category-description"><button type="button"><selectedcontent></selectedcontent></button></select></label>
+        <a href="#scores-panel">View scores ↑</a>
+        <p id="category-description">Choose a group to update the scores, rankings, and examples above.</p>
+      </div>
       <ul id="source-dates"></ul>
       <div class="download-links"><a id="results-json" href="/nepalipi/benchmark/large-comparison-2.4.8-v2.json" download>Results · JSON</a><a id="scores-csv" href="/nepalipi/benchmark/large-comparison-2.4.8-v2.csv" download>Scores · CSV</a></div>
     </div></details>

@@ -22,6 +22,14 @@ const timestamp=value=>new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'sho
 const observedRange=o=>o.observedAt?timestamp(o.observedAt)+(o.observedUntil&&o.observedUntil!==o.observedAt?' – '+timestamp(o.observedUntil):''):'Not captured';
 const suite=()=>suites.find(s=>s.id===$('comparison-set').value);
 const selectedCases=()=>suite().cases.filter(c=>$('comparison-category').value==='all'||c.category===$('comparison-category').value);
+const categoryLabels={
+  'AK-Freq':'Frequent words',
+  'AK-NEI':'Indian named entities',
+  'AK-NEF':'Foreign named entities',
+  'Multiple sources':'Entries from multiple sources',
+  'Wikidata':'Names from Wikidata',
+};
+const categoryLabel=category=>categoryLabels[category]??(category.charAt(0).toUpperCase()+category.slice(1));
 const title=p=>p.label+' · '+p.version;
 function options(id,values){
   const select=$(id),button=select.querySelector(':scope > button');
@@ -85,7 +93,7 @@ function renderTable(){
   const available=rows.filter(r=>r.score).length;
   const missing=rows.filter(r=>!r.score).map(r=>r.p.label);
   const missingNote=missing.length?missing.join(' / ')+' not captured for this test set.':'';
-  $('comparison-caption').textContent=compact?cases.length+(s.kind==='sentence'?' sentences · ':' words · ')+(category==='all'?'same inputs and references':category):s.label+' · '+(category==='all'?'All categories':category)+' · '+cases.length+' shared inputs';
+  $('comparison-caption').textContent=compact?cases.length+(s.kind==='sentence'?' sentences · ':' words · ')+(category==='all'?'same inputs and references':categoryLabel(category)):s.label+' · '+(category==='all'?'All categories':category)+' · '+cases.length+' shared inputs';
   $('comparison-scope').textContent=s.description+' · '+(category==='all'?'all categories':category)+'.';
   $('comparison-summary').textContent=compact?missingNote:cases.length+' identical inputs · '+available+' available sources · equal scores share ranks. '+missingNote;
   if($('source-dates'))$('source-dates').replaceChildren(...providers().map(p=>{
@@ -138,7 +146,7 @@ function selectSet(){
     options('comparison-metric',metrics);
     if(metrics.some(([key])=>key===previous))$('comparison-metric').value=previous;
   }
-  options('comparison-category',[['all','All categories'],...suite().categories.map(c=>[c,c])]);
+  options('comparison-category',[['all',compact?'Full test set':'All categories'],...suite().categories.map(c=>[c,compact?categoryLabel(c):c])]);
   renderTable();
 }
 options('comparison-set',suites.map(s=>[s.id,s.label+' · '+s.cases.length+(s.kind==='sentence'?' sentences':' words')]));
