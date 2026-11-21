@@ -11,40 +11,10 @@
   font-display: swap;
 }
 :root {
-  color-scheme: light;
   font-family: 'DM Sans', 'Noto Sans Devanagari', sans-serif;
   color: var(--text);
   background: var(--page);
   font-synthesis: none;
-  --page: #fafafa;
-  --surface: #f0f0f0;
-  --field: #fff;
-  --text: #202020;
-  --muted: #626262;
-  --line: #d8d8d8;
-  --table-grid: #858585;
-  --table-edge: #858585;
-  --header-bg: #e8e8e8;
-  --accent: #202020;
-  --accent-ink: #fff;
-  --hover: #e8e8e8;
-  --control-border: #858585;
-}
-:root[data-theme=ink] {
-  color-scheme: dark;
-  --page: #0a0a0a;
-  --surface: #171717;
-  --field: #222;
-  --text: #f2f2f2;
-  --muted: #a0a0a0;
-  --line: #363636;
-  --table-grid: #707070;
-  --table-edge: #707070;
-  --header-bg: #222;
-  --accent: #f5f5f5;
-  --accent-ink: #171717;
-  --hover: #202020;
-  --control-border: #777;
 }
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--text); background: var(--page); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }

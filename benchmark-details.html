@@ -1,21 +1,23 @@
 <!doctype html>
-<html lang="en" data-theme="ink">
+<html lang="en" data-theme="paper">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#ffffff">
   <meta name="description" content="Current Nepalipi results: what improved, what still needs work, and a live check against the loaded engine.">
   <title>Benchmark details — Nepalipi</title>
   <link rel="icon" href="/nepalipi/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/nepalipi/theme.css">
   <link rel="stylesheet" href="/nepalipi/benchmark/dashboard.css">
   <link rel="stylesheet" href="/nepalipi/benchmark/select.css">
+  <link rel="stylesheet" href="/nepalipi/benchmark/appearance.css">
   <script type="module" src="/nepalipi/benchmark/dashboard.js"></script>
   <script type="module" src="/nepalipi/benchmark/theme.js"></script>
 </head>
 <body class="dashboard-page">
-  <header class="dashboard-header"><div class="header-start"><a class="dashboard-brand" href="/nepalipi/" aria-label="Nepalipi home">nepalipi</a><nav aria-label="Main navigation"><a href="/nepalipi/">Playground</a><a href="/nepalipi/benchmark.html">Comparison</a></nav></div><div class="header-actions"><div class="appearance" role="group" aria-label="Benchmark appearance"><button type="button" data-theme-choice="paper" aria-pressed="false">Light</button><button type="button" data-theme-choice="ink" aria-pressed="true">Dark</button></div><a class="playground-link" href="/nepalipi/input-demo.html">Try Nepalipi <span aria-hidden="true">↗</span></a></div></header>
+  <header class="dashboard-header"><div class="header-start"><a class="dashboard-brand" href="/nepalipi/" aria-label="Nepalipi home"><span class="brand-mark" lang="ne" aria-hidden="true">ने</span>nepalipi</a><nav aria-label="Main navigation"><a href="/nepalipi/">Playground</a><a href="/nepalipi/benchmark.html">Comparison</a></nav></div><div class="header-actions"><div class="appearance" role="group" aria-label="Benchmark appearance"><button type="button" data-theme-choice="paper" aria-pressed="true">Light</button><button type="button" data-theme-choice="ink" aria-pressed="false">Dark</button></div><a class="playground-link" href="/nepalipi/input-demo.html">Try Nepalipi <span aria-hidden="true">↗</span></a></div></header>
   <main class="dashboard-main">
     <section class="dashboard-hero" aria-labelledby="page-title">
-      <div><p class="overline">NEPALIPI / QUALITY CHECK</p><h1 id="page-title">Writing benchmark.</h1><p class="hero-description">What improved. What works. What still needs a choice.</p></div>
+      <div><p class="overline">NEPALIPI / QUALITY CHECK</p><h1 id="page-title">Writing benchmark<span>.</span></h1><p class="hero-description">What improved. What works. What still needs a choice.</p></div>
       <div class="engine-stamp"><div><span>LOADED ENGINE</span><strong id="loaded-version">—</strong></div><div><span>RECORDED ENGINE</span><strong id="recorded-version">—</strong></div><p>Results recorded <time id="recorded-at">—</time></p></div>
     </section>
     <section id="freshness" class="freshness" data-state="checking" aria-label="Loaded engine check">

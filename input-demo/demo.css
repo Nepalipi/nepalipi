@@ -11,42 +11,6 @@
 }
 
 /* Consumer-owned demo styles. The browser API loads none of this stylesheet. */
-:root {
-  color-scheme: light;
-  --page: #fff;
-  --surface: #fff;
-  --field: #fdfcff;
-  --text: #202037;
-  --muted: #555568;
-  --line: #dcdbe6;
-  --accent: #423292;
-  --accent-ink: #fff;
-  --soft: #eee9ff;
-  --side: #f2f0f8;
-  --code: #f5f2fb;
-  --code-text: #35334a;
-  --frame: linear-gradient(112deg, #a895f2, #dec6fd 32%, #f5b1a0 76%, #ffd4ac);
-  --hero-accent: #6547b8;
-  --popup-shadow: 0 12px 30px #2d265a22, 0 2px 6px #2d265a12;
-}
-:root[data-theme=ink] {
-  color-scheme: dark;
-  --page: #171522;
-  --surface: #242033;
-  --field: #1a1727;
-  --text: #f6f3fd;
-  --muted: #c1b9d2;
-  --line: #554c68;
-  --accent: #d6c7ff;
-  --accent-ink: #23193b;
-  --soft: #41345c;
-  --side: #352b48;
-  --code: #201a2f;
-  --code-text: #e1d7f4;
-  --frame: linear-gradient(112deg, #534090, #7751a0 35%, #9e5c79 75%, #a36a55);
-  --hero-accent: #c5b0ff;
-  --popup-shadow: 0 12px 30px #0008, 0 2px 6px #0004;
-}
 * { box-sizing: border-box; }
 html { scroll-padding-top: 24px; }
 body { margin: 0; background: var(--page); color: var(--text); font: 14px/1.55 DM, Nepali, sans-serif; }
