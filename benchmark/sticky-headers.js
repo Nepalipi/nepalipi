@@ -2,7 +2,7 @@
 // A horizontal overflow region traps CSS sticky positioning on the vertical axis,
 // so translate each header inside its own full-height table instead.
 const tables=[...document.querySelectorAll('.source-table,.word-grid')].map(table=>({
-  table,head:table.tHead,offset:0
+  table,head:table.tHead,offset:0,height:0
 }));
 let frame=0;
 function update(){
@@ -11,13 +11,18 @@ function update(){
     const bounds=item.head.getBoundingClientRect();
     const originalTop=bounds.top-item.offset;
     const maximum=Math.max(0,item.table.getBoundingClientRect().bottom-originalTop-bounds.height);
-    return {...item,height:bounds.height,offset:Math.max(0,Math.min(-originalTop,maximum))};
+    return {item,height:bounds.height,offset:Math.max(0,Math.min(-originalTop,maximum))};
   });
-  positions.forEach(({head,height,offset},i)=>{
-    tables[i].offset=offset;
-    head.style.setProperty('--header-offset',offset+'px');
-    tables[i].table.style.setProperty('--header-height',height+'px');
-  });
+  for(const {item,height,offset} of positions){
+    if(offset!==item.offset){
+      item.offset=offset;
+      item.head.style.transform='translate3d(0,'+offset+'px,0)';
+    }
+    if(height!==item.height){
+      item.height=height;
+      item.table.style.setProperty('--header-height',height+'px');
+    }
+  }
 }
 function schedule(){if(!frame)frame=requestAnimationFrame(update);}
 const sizes=new ResizeObserver(schedule);

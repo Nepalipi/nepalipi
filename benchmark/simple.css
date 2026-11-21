@@ -55,7 +55,7 @@ input::placeholder { color: var(--muted); opacity: 1; }
 .panel-heading > span { font-size: 12px; color: var(--muted); }
 .simple-source-scroll { overflow: auto; }
 .source-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-variant-numeric: tabular-nums; text-align: left; }
-.source-table thead, .word-grid thead { position: relative; z-index: 7; transform: translateY(var(--header-offset,0px)); }
+.source-table thead, .word-grid thead { position: relative; z-index: 7; will-change: transform; }
 .source-table caption { padding: 6px 0 14px; color: var(--muted); text-align: left; font-size: 12px; }
 .source-table thead th { padding: 11px 12px; border-bottom: 1px solid var(--table-grid); color: var(--text); background: var(--header-bg); font-size: 12px; font-weight: 750; font-synthesis: weight; text-align: right; }
 .source-table thead th:nth-child(2) { width: 38%; padding-left: 12px; text-align: left; }

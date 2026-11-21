@@ -63,6 +63,11 @@ export function setWordComparison(suite,providers,cases){
   const firstLoad=!source;
   scope=key;source=suite;
   tools=[...providers.filter(p=>p.id!=='current'),...providers.filter(p=>p.id==='current')];
+  const nepscriptIndex=tools.findIndex(tool=>tool.id==='nepscript');
+  const nepalipiIndex=tools.findIndex(tool=>tool.id==='current');
+  if(nepscriptIndex!==-1&&nepalipiIndex!==-1){
+    [tools[nepscriptIndex],tools[nepalipiIndex]]=[tools[nepalipiIndex],tools[nepscriptIndex]];
+  }
   page=0;
   const indices=new Map(suite.cases.map((c,i)=>[c.id,i]));
   rows=cases.map(c=>{
