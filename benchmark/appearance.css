@@ -1,6 +1,6 @@
 :root {
   --ink: var(--text);
-  --control-border: #88809a;
+  --control-border: #818181;
   --table-grid: var(--control-border);
   --table-edge: var(--control-border);
   --header-bg: var(--soft);
@@ -13,7 +13,7 @@
 }
 
 :root[data-theme=ink] {
-  --control-border: #8c809f;
+  --control-border: #8c8c8c;
 }
 
 :is(.simple-header, .dashboard-header) {
