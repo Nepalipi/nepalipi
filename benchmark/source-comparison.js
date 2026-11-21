@@ -105,7 +105,7 @@ function renderTable(){
     renderWord();
   }
   if(compact)renderContext(s);
-  setWordComparison(s,providers(),cases);
+  setWordComparison(s,rows.map(({p})=>p),cases);
 }
 function renderContext(s){
   const sentence=s.kind==='sentence',headers=document.querySelectorAll('.source-table thead th');
@@ -121,7 +121,7 @@ function renderContext(s){
   $('words').textContent=sentence?'Sentence by sentence':'Word by word';
   $('word-search-label').textContent=sentence?'Find a sentence':'Find a word';
   $('word-empty').textContent=sentence?'No sentences match this search.':'No words match this search.';
-  $('word-note').textContent=sentence?'Recorded full outputs. ✓ matches a target sentence. Scroll → for more tools. Search filters rows; scores stay unchanged.':'Recorded first suggestions. ✓ matches an expected spelling. Expand a cell for alternatives. Scroll → for more tools. Search filters these rows; scores stay unchanged.';
+  $('word-note').textContent=sentence?'Recorded full outputs. ✓ matches a target sentence. Columns follow the score ranking. Scroll → for more tools. Search filters rows; scores stay unchanged.':'Recorded first suggestions. ✓ matches an expected spelling. Expand a cell for alternatives. Columns follow the score ranking. Scroll → for more tools. Search filters these rows; scores stay unchanged.';
   $('source-note').textContent=sentence?'Nepalipi is measured by typing in the editor. Other tools combine isolated-word first choices; sentence context is not tested for them.':'All tools cover every word. Google & Quillpad use saved per-word responses; dates and capture counts are below.';
   $('metric-explanation').textContent=sentence?'Exact sentence: the complete output equals a frozen target. Higher is better. Word error: word edits divided by reference words. Character error: character edits divided by reference characters. Lower errors are better; insertion errors can exceed 100%.':'First match: the first suggestion equals an expected spelling. Within three: an expected spelling appears in the first three suggestions. Within five: an expected spelling appears in the first five suggestions. Higher is better. Counts show matches / tested words.';
   $('comparison-method').textContent=sentence?'Every source uses the same fixed Roman sentences. Nepalipi is captured through the actual editor with preferences off. Other sources compose their first isolated-word outputs using the recorded boundary protocol. No top-three/top-five sentence ranking is claimed. Errors remain in the denominator.':'Every engine receives the same Roman input, with personal preferences off; outputs are scored against frozen corpus references. nepscript, Lekhika and Nepali Unicoder return one spelling each. Errors remain in the denominator. First/within-three/within-five use original unique candidate order. Character error uses the first output.';

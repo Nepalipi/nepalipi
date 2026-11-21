@@ -7,7 +7,7 @@ const make=(tag,text,className)=>{
   return el;
 };
 const sentencePageSize=10;
-let source,tools=[],rows=[],page=0,scope='';
+let source,tools=[],rows=[],page=0,scope='',caseScope='';
 
 function outputCell(c,index,tool){
   const cell=make('td');cell.dataset.source=tool.id;
@@ -58,17 +58,12 @@ function render(){
 }
 export function setWordComparison(suite,providers,cases){
   if(!$('words-panel'))return;
-  const key=suite.id+'|'+providers.map(p=>p.id).join(',')+'|'+cases.map(c=>c.id).join(',');
+  const caseKey=suite.id+'|'+cases.map(c=>c.id).join(',');
+  const key=caseKey+'|'+providers.map(p=>p.id).join(',');
   if(key===scope)return;
   const firstLoad=!source;
-  scope=key;source=suite;
-  tools=[...providers.filter(p=>p.id!=='current'),...providers.filter(p=>p.id==='current')];
-  const nepscriptIndex=tools.findIndex(tool=>tool.id==='nepscript');
-  const nepalipiIndex=tools.findIndex(tool=>tool.id==='current');
-  if(nepscriptIndex!==-1&&nepalipiIndex!==-1){
-    [tools[nepscriptIndex],tools[nepalipiIndex]]=[tools[nepalipiIndex],tools[nepscriptIndex]];
-  }
-  page=0;
+  if(caseKey!==caseScope)page=0;
+  caseScope=caseKey;scope=key;source=suite;tools=providers;
   const indices=new Map(suite.cases.map((c,i)=>[c.id,i]));
   rows=cases.map(c=>{
     const index=indices.get(c.id);
