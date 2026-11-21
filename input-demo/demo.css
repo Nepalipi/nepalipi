@@ -25,7 +25,8 @@
   --side: #f2f0f8;
   --code: #f5f2fb;
   --code-text: #35334a;
-  --editor-gradient: linear-gradient(112deg, #a4a8ef, #b9c9f5 42%, #91d9d0 100%);
+  --editor-gradient: radial-gradient(ellipse at 16% 0%, #ded6f7, transparent 58%),
+    linear-gradient(112deg, #ebebf7, #e3edf7 55%, #dcefe9);
   --frame: linear-gradient(112deg, #a895f2, #dec6fd 32%, #f5b1a0 76%, #ffd4ac);
   --hero-accent: #6547b8;
   --popup-shadow: 0 12px 30px #2d265a22, 0 2px 6px #2d265a12;
@@ -44,7 +45,8 @@
   --side: #352b48;
   --code: #201a2f;
   --code-text: #e1d7f4;
-  --editor-gradient: linear-gradient(112deg, #555693, #4d668e 42%, #317a79 100%);
+  --editor-gradient: radial-gradient(ellipse at 16% 0%, #45395a, transparent 58%),
+    linear-gradient(112deg, #322c45, #30394d 55%, #2d4645);
   --frame: linear-gradient(112deg, #534090, #7751a0 35%, #9e5c79 75%, #a36a55);
   --hero-accent: #c5b0ff;
   --popup-shadow: 0 12px 30px #0008, 0 2px 6px #0004;
